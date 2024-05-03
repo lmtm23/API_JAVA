@@ -37,12 +37,12 @@ public class Post {
 				 RequestSpecification httpRequest = RestAssured.given(); 
 				 httpRequest.headers("Content-Type", "application/json");
 				 httpRequest.body(obj.toString());
-				 Response response = httpRequest.post("/users");
+				 Response response = httpRequest.post("/register");
 				 
 				 int statusCode = response.getStatusCode();				 
-				 Assert.assertEquals(statusCode, 201);
-				 response.then().body("name", equalTo("morpheus"));
-				 response.then().body("job", equalTo("leader"));				
+				 Assert.assertEquals(statusCode, 200);
+				 response.then().body("id", equalTo(4));
+				 response.then().body("token", equalTo("QpwL5tke4Pnpja7X4"));				
 				 Reporter.log("URL:"+ RestAssured.baseURI);	
 				 Reporter.log("Status code:"+statusCode);
 				 Reporter.log("JsonBody:"+obj);
@@ -94,13 +94,13 @@ public class Post {
 		  .contentType("application/json")  //another way to specify content type
 	      .body(obj.toString())
 	  .when()
-	  	.post("https://reqres.in/api/user")
+	  	.post("https://reqres.in/api/register")
 	  .then()
-	  	.assertThat().statusCode(201)
+	  	.assertThat().statusCode(200)
 	  	.assertThat().contentType(ContentType.JSON)
-	  	.assertThat().body("name", equalTo("morpheus"))
-	  	.assertThat().body("job", equalTo("leader"));
-	  Reporter.log("Success 201 validation");
+	  	.assertThat().body("id", equalTo(4))
+	  	.assertThat().body("token", equalTo("QpwL5tke4Pnpja7X4"));
+	  Reporter.log("Success 200 validation");
 	  	
 	  	 
 	  
